@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+	
+	<bean id="dbcp" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" /> 
+		<property name="url" value="jdbc:mariadb://183.111.242.21:3306/pukyung15" /> 
+		<property name="username" value="pukyung15" /> 
+		<property name="password" value="pukyung00!!1" /> 
+	</bean>
+	
+	<bean id="jtpl" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dbcp"/>
+	</bean>
+	
+	<bean id="BangDao" class="east.BangDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean>
+	
+	<bean id="UserDao" class="east.UserDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean>
+	
+	<bean id="BoardDao" class="east.BoardDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean>
+	
+	<bean id="CommentDao" class="east.CommentDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean>
+	
+	<bean id="LikeDao" class="east.LikeDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean>
+	
+	<bean id="FollowDao" class="east.FollowDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean>
+	
+	<bean id="User_infoDao" class="east.User_infoDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean>
+	
+	<bean id="MessageDao" class="east.MessageDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean> 
+	
+	<bean class="east.Ctrl">
+		<property name="BangDao" ref="BangDao"/>		
+		<property name="UserDao" ref="UserDao"/>
+		<property name="BoardDao" ref="BoardDao"/>
+		<property name="CommentDao" ref="CommentDao"/>
+		<property name="LikeDao" ref="LikeDao"/>
+		<property name="FollowDao" ref="FollowDao"/>
+		<property name="User_infoDao" ref="User_infoDao"/>
+		<property name="MessageDao" ref="MessageDao"/>
+	</bean>
+
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>	
+
+	
+</beans>
