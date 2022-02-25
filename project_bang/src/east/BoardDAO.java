@@ -13,4 +13,4 @@ public interface BoardDAO {
 	public int minusLikeCount( String no ) throws Exception;
 }
 
-//update 2 25
+//update 2 25ddddd
