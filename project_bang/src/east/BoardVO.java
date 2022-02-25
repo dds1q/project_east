@@ -87,5 +87,5 @@ alter table tbl_board ADD fsn VARCHAR( 50 ) NULL AFTER ofn;
 alter table tbl_board ADD likeCount INT default 0 AFTER viewCount;
 
 update tbl_board set likeCount = ( select count(*) from tbl_like where no=17 ) WHERE no=17;
-
+//update 2 25
 */
