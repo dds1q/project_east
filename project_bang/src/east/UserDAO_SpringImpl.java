@@ -1,10 +1,8 @@
 package east;
 
-import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -61,6 +59,29 @@ public class UserDAO_SpringImpl implements UserDAO {
 		};
 		int uc = jdbcTemplate.update("INSERT INTO user_list VALUES( ? , ? )" , pss );
 		return uc;		
+	}
+
+	@Override
+	public UserVO User_info(String username) throws Exception {
+
+		RowMapper<UserVO> rowMapper = new RowMapper<UserVO>() {			
+			
+			@Override
+			public UserVO mapRow(ResultSet rs, int arg1) throws SQLException {
+				UserVO vo = new UserVO();				
+				vo.setUsername( rs.getString("username"));				
+				vo.setUser_nick( rs.getString("user_nick"));
+				vo.setUser_intro( rs.getString("user_intro"));							
+				vo.setFsn( rs.getString("fsn"));				
+				return vo;
+			}			
+		};			
+		
+		UserVO vo = jdbcTemplate.queryForObject(
+				"select * from user_list WHERE username='"+ username + "'", rowMapper);
+
+		return vo;
+
 	}
 }
 /*
