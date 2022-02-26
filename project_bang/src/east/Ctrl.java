@@ -896,7 +896,7 @@ public class Ctrl {
 		String username = (String)session.getAttribute("username");
 		
 		
-		User_infoVO vo = new User_infoVO();
+		UserVO vo = new UserVO();
 		String ofn = mpr.getOriginalFileName("image");
 		if( ofn != null )
 		{
@@ -910,9 +910,9 @@ public class Ctrl {
 		}	
 		vo.setUser_nick( nick );
 		vo.setUser_intro( intro );
-		vo.setUsername(username);
+		vo.setUsername( username );
 		
-		User_infoDao.modifyInfo( vo );	
+		UserDao.modifyInfo( vo );	
 		
 		response.setContentType("text/html; charset=UTF-8");             
         PrintWriter out = response.getWriter();
