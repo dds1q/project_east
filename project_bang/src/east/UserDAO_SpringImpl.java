@@ -18,6 +18,8 @@ public class UserDAO_SpringImpl implements UserDAO {
 	}
 
 	private JdbcTemplate jdbcTemplate = null;
+	
+	// 가입할 때 중복체크하기위해 유저정보를 불러옴
 	@Override
 	public boolean findUser(String username , String password ) throws Exception {
 		boolean t = false;
@@ -46,6 +48,7 @@ public class UserDAO_SpringImpl implements UserDAO {
 		return t;
 	}
 
+	// 가입 후 유저정보 등록
 	@Override
 	public int addUser(String username, String password) throws Exception {
 		PreparedStatementSetter pss = new PreparedStatementSetter() {
@@ -60,7 +63,8 @@ public class UserDAO_SpringImpl implements UserDAO {
 		int uc = jdbcTemplate.update("INSERT INTO user_list VALUES( ? , ? )" , pss );
 		return uc;		
 	}
-
+	
+	// 특정 유저 정보 불러오기
 	@Override
 	public UserVO User_info(String username) throws Exception {
 
@@ -82,6 +86,27 @@ public class UserDAO_SpringImpl implements UserDAO {
 
 		return vo;
 
+	}
+
+	// 유저 정보 수정하기
+	@Override
+	public int modifyInfo(UserVO vo) throws Exception {
+		PreparedStatementSetter pss = new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement stmt) throws SQLException {
+				stmt.setString( 1, vo.getUser_nick() );
+				stmt.setString( 2 , vo.getUser_intro() );	
+				stmt.setString( 3 , vo.getOfn() );	
+				stmt.setString( 4 , vo.getFsn() );								
+			}
+			
+		};
+		
+		int uc = jdbcTemplate.update("UPDATE user_list SET user_nick=? , user_intro=? , "
+				+ "ofn=? ,fsn=? WHERE username='" + vo.getUsername() +"'" , pss );
+		
+		return uc;
 	}
 }
 /*
