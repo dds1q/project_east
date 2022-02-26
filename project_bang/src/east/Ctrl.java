@@ -293,11 +293,9 @@ public class Ctrl {
 		
 		mnv.setViewName("board/board_list");				
 		mnv.addObject("list", BoardDao.findAll());		
-		mnv.addObject("info" , User_infoDao.findUser_info( username ) );
+		mnv.addObject("info" , UserDao.User_info( username ) );
 		mnv.addObject("following", FollowDao.findFollowing( username ));
-		mnv.addObject("follower", FollowDao.findFollower( username ));
-		
-		
+		mnv.addObject("follower", FollowDao.findFollower( username ));		
 		
 		return mnv;
 	}	
