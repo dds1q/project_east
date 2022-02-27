@@ -440,7 +440,7 @@ public class Ctrl {
 		mnv.addObject("like" , LikeDao.findLike(  no , username ) );
 		mnv.addObject("board", BoardDao.findBoard( no ));		
 		mnv.addObject("comment", CommentDao.findAll( no ));		
-		mnv.addObject("info", User_infoDao.findUser_info( author ) );	
+		mnv.addObject("info", UserDao.User_info( author ) );	
 
 		return mnv;
 	}
@@ -452,8 +452,8 @@ public class Ctrl {
 		JSONObject jo = new JSONObject();
 		
 	    jo.put("success", true );
-	    jo.put("user_image", User_infoDao.findUser_info( author ).getFsn());
-	    jo.put("user_nick", User_infoDao.findUser_info( author ).getUser_nick());
+	    jo.put("user_image", UserDao.User_info( author ).getFsn());
+	    jo.put("user_nick", UserDao.User_info( author ).getUser_nick());
 		response.setContentType("text/html; charset=UTF-8");             
         PrintWriter out = response.getWriter();
 	    out.print( jo );
