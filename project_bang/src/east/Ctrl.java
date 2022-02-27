@@ -309,11 +309,11 @@ public class Ctrl {
 		mnv.setViewName("board/board_list_other");
 		mnv.addObject("username_other" , username_other );	
 		mnv.addObject("follow_exist" , FollowDao.findFollow( username_me, username_other));
-		mnv.addObject("info" , User_infoDao.findUser_info( username_other ) );
+		mnv.addObject("info" , UserDao.User_info( username_other ) );
 		mnv.addObject("list", BoardDao.findAll());		
 		mnv.addObject("following", FollowDao.findFollowing( username_other ));
 		mnv.addObject("follower", FollowDao.findFollower( username_other ));
-		mnv.addObject("me", User_infoDao.findUser_info( username_me ));
+		mnv.addObject("me", UserDao.User_info( username_me ));
 		
 		return mnv;
 	}
@@ -474,8 +474,8 @@ public class Ctrl {
 		mnv.addObject("like" , LikeDao.findLike(  no , (String)username ) );
 		mnv.addObject("board", BoardDao.findBoard( no ));		
 		mnv.addObject("comment", CommentDao.findAll( no ));	
-		mnv.addObject("info", User_infoDao.findUser_info( author ) );
-		mnv.addObject("info2" , User_infoDao.findUser_info( (String)username ) );
+		mnv.addObject("info", UserDao.User_info( author ) );
+		mnv.addObject("info2" , UserDao.User_info( (String)username ) );
 		
 		return mnv;
 	}
