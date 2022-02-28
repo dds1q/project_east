@@ -876,7 +876,7 @@ public class Ctrl {
 		ModelAndView mnv = new ModelAndView();
 		String username = (String)session.getAttribute("username");
 		mnv.setViewName("modifyInfo");		
-		mnv.addObject("info" , User_infoDao.findUser_info( username ) );		
+		mnv.addObject("info" , UserDao.User_info( username ) );		
 		return mnv;
 	}
 	
@@ -904,7 +904,6 @@ public class Ctrl {
 			
 			String fsn = UUID.randomUUID().toString();
 			file.renameTo( new File( Util.upload() + fsn + ".jpg" ) );
-
 			vo.setOfn( ofn );
 			vo.setFsn( fsn );
 		}	
