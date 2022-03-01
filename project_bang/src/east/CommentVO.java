@@ -8,20 +8,7 @@ public class CommentVO {
 	private String author = null;
 	private String content = null;
 	private Date regDate = null;
-	private String fsn = null;
-	private String nick = null;
-	public String getFsn() {
-		return fsn;
-	}
-	public void setFsn(String fsn) {
-		this.fsn = fsn;
-	}
-	public String getNick() {
-		return nick;
-	}
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
+
 	public Integer getRno() {
 		return rno;
 	}
@@ -63,6 +50,8 @@ CREATE TABLE tbl_comment (
 	PRIMARY KEY( rno , no ),
 	FOREIGN KEY( no ) REFERENCES tbl_board( no )	
 );
+
+alter table tbl_comment drop nick;
 
 
 */

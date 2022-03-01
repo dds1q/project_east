@@ -73,6 +73,7 @@ function pull( no ) {
 	xhr.open("GET", "delLike.east?no=" + no , true );
 	xhr.send( null );
 }
+
 <%--
 $("#btnRecommend").click(function(){
     if(confirm("해당 글을 추천하시겠습니까?")){
@@ -270,25 +271,29 @@ text-align: center;
         <div class="card">            
             <div class="comment-widgets">
                 <!-- Comment Row -->    
-                <Q:forEach items="${comment }" var="comment">           
+                <Q:forEach items="${comment }" var="comment">                       
                 <div class="d-flex flex-row comment-row">     
+                	<Q:forEach items="${users }"  var="users">  
+                	<Q:if test="${ users.username eq comment.author }">
                 	<Q:choose>
-                	<Q:when test="${ !(empty comment.fsn) }" >      	
-                    <div class="p-2"><img src="image.jsp?fname=${comment.fsn }" onclick="click_board( '${comment.author}' , '${username }');" alt="user" width="50" class="rounded-circle"></div>
+                	<Q:when test="${ !(empty users.fsn) }" >      	
+                    <div class="p-2"><img src="image.jsp?fname=${users.fsn }" onclick="click_board( '${users.username}' , '${username }');" alt="user" width="50" class="rounded-circle"></div>
                     </Q:when>
                     <Q:otherwise>
-                    <div class="p-2"><img src="anony.jpg" onclick="click_board( '${comment.author}' , '${username }');" alt="user" width="50" class="rounded-circle"></div>
+                    <div class="p-2"><img src="anony.jpg" onclick="click_board( '${users.username}' , '${username }');" alt="user" width="50" class="rounded-circle"></div>
                     </Q:otherwise>
                     </Q:choose>
                     <div class="comment-text active w-100">
-                        <h6 class="font-medium">${comment.nick}</h6> <span class="m-b-15 d-block">${comment.content}</span>
+                        <h6 class="font-medium">${users.user_nick}</h6> <span class="m-b-15 d-block">${comment.content}</span>
                         <div class="comment-footer"> <span class="text-muted float-right">${comment.regDate}</span>
                        <Q:if test="${username eq comment.author}">
                         <button type="button" class="btn btn-danger btn-sm" onclick="location.href='delComment.east?rno=${comment.rno}&no=${board.no}';">Delete</button>
                     	</Q:if>	
                     </div>
-                    </div>
-                </div> <!-- Comment Row -->
+                    </div>   
+                    </Q:if>                 
+                    </Q:forEach>
+                </div> <!-- Comment Row -->                
                 </Q:forEach>
             </div> <!-- Card -->
         </div>
@@ -330,8 +335,6 @@ text-align: center;
        <form method="POST" action="addComment.east">
        <textarea class="form-control" name="content" placeholder="Leave a commment.."></textarea>
        <input type="hidden" name="no" value="${board.no}"/>
-       <input type="hidden" name="nick" value="${info2.user_nick}"/>
-       <input type="hidden" name="fsn" value="${info2.fsn}"/>
        <button class="btn btn-info" type="submit" >submit</button>
        </form>
     </div> 

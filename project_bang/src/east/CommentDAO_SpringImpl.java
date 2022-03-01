@@ -33,9 +33,7 @@ public class CommentDAO_SpringImpl implements CommentDAO {
 				vo.setNo( rs.getInt("no") );
 				vo.setAuthor( rs.getString("author"));
 				vo.setContent(rs.getString("content"));
-				vo.setRegDate( rs.getDate("regDate"));
-				vo.setFsn( rs.getString("fsn"));
-				vo.setNick( rs.getString("nick"));
+				vo.setRegDate( rs.getDate("regDate"));			
 				return vo;
 			}
 			
@@ -54,12 +52,10 @@ public class CommentDAO_SpringImpl implements CommentDAO {
 				stmt.setInt( 1 , vo.getNo() );
 				stmt.setString( 2 , vo.getContent() ) ;			
 				stmt.setString( 3 , vo.getAuthor() ) ;	
-				stmt.setString( 4 , vo.getFsn() );
-				stmt.setString( 5 , vo.getNick());
 			}
 			
 		};
-		int uc = jdbcTemplate.update("INSERT INTO tbl_comment( no , content , author ,fsn , nick ) VALUES(  ? , ? , ? , ? ,? )" , pss );
+		int uc = jdbcTemplate.update("INSERT INTO tbl_comment( no , content , author ) VALUES(  ? , ? , ?  )" , pss );
 		return uc;
 	}
 
