@@ -473,6 +473,7 @@ public class Ctrl {
 		mnv.addObject("like" , LikeDao.findLike(  no , (String)username ) );
 		mnv.addObject("board", BoardDao.findBoard( no ));		
 		mnv.addObject("comment", CommentDao.findAll( no ));	
+		mnv.addObject("users", UserDao.findAll());	
 		mnv.addObject("info", UserDao.User_info( author ) );
 		mnv.addObject("info2" , UserDao.User_info( (String)username ) );
 		
@@ -607,9 +608,8 @@ public class Ctrl {
 		ModelAndView mnv = new ModelAndView();		
 		mnv.setViewName("viewMessage");
 	
-		mnv.addObject("message", MessageDao.findAll());	
-		mnv.addObject("username_other" , username_other) ;
-		mnv.addObject("info", User_infoDao.findUser_info( username_other ));
+		mnv.addObject("message", MessageDao.findAll());			
+		mnv.addObject("info", UserDao.User_info( username_other ));
 	
 		return mnv;
 	}	

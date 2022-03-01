@@ -270,17 +270,44 @@ ${username}<a href="logout.east">[logout]</a></div>
 						</div>						                 
                    	</div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="h6 text-muted">Followers</div>
+                        <div class="main" data-toggle="modal" data-target="#modal_follower">
+                        <li class="list-group-item" >                        	
+                            <div class="h6 text-muted" >Followers</div>                           
                             <div class="h5">${fn:length( follower ) }</div>                            
-                        </li>
+                        </li>			
+							<div class="modal fade" id="modal_follower" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">							
+									<span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="font-size:30px;">&times;
+									</span></button>								
+									<iframe id="no"		
+										width="470" height="700"
+										style="border:0"
+										src="followers.east?to_user=${ username_other }">		
+										</iframe>	
+										</div>							
+								</div>					
+							 </div>
+						</div>
+						<div class="main" data-toggle="modal" data-target="#modal_following">
                         <li class="list-group-item">
 							<div class="h6 text-muted">Following</div>
                             <div class="h5">${fn:length( following ) }</div>
-                        </li>
-                        <li class="list-group-item">
-							 <div class="h6 text-muted" onclick="location.href='board_list.east'">My page</div>		 
-    					</li>
+                        </li>		
+							<div class="modal fade" id="modal_following" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document" >
+								<div class="modal-content">							
+									<span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="font-size:30px;">&times;
+									</span></button>								
+										<iframe id="no"		
+										width="470" height="700"
+										style="border:0; align:center;"
+										src="following.east?from_user=${ username_other }">		
+										</iframe>	
+										</div>							
+									</div>					
+							 	</div>						 	
+						</div>	
                     </ul>
                 </div>
             </div>            
