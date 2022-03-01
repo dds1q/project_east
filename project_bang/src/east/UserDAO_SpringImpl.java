@@ -3,6 +3,7 @@ package east;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -108,7 +109,28 @@ public class UserDAO_SpringImpl implements UserDAO {
 		
 		return uc;
 	}
+
+	@Override
+	public List<UserVO> findAll() throws Exception {
+		RowMapper<UserVO> rowMapper = new RowMapper<UserVO>() {
+			@Override
+			public UserVO mapRow(ResultSet rs, int arg1) throws SQLException {
+				UserVO vo = new UserVO();
+
+				vo.setUsername( rs.getString("username"));
+				vo.setFsn( rs.getString("fsn"));
+				vo.setOfn( rs.getString("ofn"));
+				vo.setUser_nick( rs.getString("user_nick"));
+
+				return vo;
+			}
+			
+		};
+		return jdbcTemplate.query("select * from user_list", rowMapper);
+	}
+	
 }
+
 /*
 CREATE TABLE user_list(
 	username VARCHAR( 50 ) NOT NULL PRIMARY KEY,

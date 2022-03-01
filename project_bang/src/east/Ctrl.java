@@ -444,7 +444,7 @@ public class Ctrl {
 
 		return mnv;
 	}
-	// 유저 이미지, 아이디 찾아줌
+	// 유저 이미지, 닉네임 찾아줌
 	@RequestMapping("/userimage.east")
 	public void getUserimage( @RequestParam("no") String no , HttpServletResponse response) throws Exception{
 
@@ -456,8 +456,7 @@ public class Ctrl {
 	    jo.put("user_nick", UserDao.User_info( author ).getUser_nick());
 		response.setContentType("text/html; charset=UTF-8");             
         PrintWriter out = response.getWriter();
-	    out.print( jo );
-	
+	    out.print( jo );	
 	}
 	
 	// 게시글 풀버전 조회하기, 댓글 보기 ( 고유번호인 글번호로 구분)
@@ -566,15 +565,11 @@ public class Ctrl {
 			mnv.setViewName("redirect:viewBoard_full.east?no="+ no + "&ecode=invalid_username");
 			return mnv;
 		}
-		String fsn = request.getParameter("fsn");
-		String nick = request.getParameter("nick");
 		
 		CommentVO vo = new CommentVO();		
 		vo.setNo( Integer.parseInt( no ) );
 		vo.setContent( content );
-		vo.setAuthor( (String)author );	
-		vo.setFsn( fsn );
-		vo.setNick( nick );
+		vo.setAuthor( (String)author );			
 		
 		CommentDao.addComment( vo );			
 		mnv.setViewName("redirect:viewBoard_full.east?no=" + no );
