@@ -227,7 +227,10 @@ ${username} <a href="logout.east">[logout]</a></div>
 							</div>							
 						</div>					
 				 	</div>
-					</div>                   
+					</div>  									
+					<button class="btn btn-primary btn-icon-text btn-edit-profile" style="margin-top:5px;">
+						 Message
+					</button>                 
                    	</div>
                    	<!--  -->
                     <ul class="list-group list-group-flush">
@@ -316,7 +319,7 @@ ${username} <a href="logout.east">[logout]</a></div>
 							onload="load_pop( ${vs.index} , ${board.no } )"
 							frameborder="0" 
 							scrolling="no"
-							width="70%"
+							width="100%"
 							style= "overflow-x:hidden; overflow-y:auto;"
 							src="viewBoard.east?no=${board.no}">		
 					</iframe> 					

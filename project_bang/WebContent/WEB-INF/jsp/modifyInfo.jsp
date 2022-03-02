@@ -102,7 +102,7 @@ function previewImage(targetObj, View_area) {
 	</Q:when>
 	<Q:otherwise>
 		<div id="View_area">
-		<img id="prev_View_area" name="image" src="image.jsp?fname=${info.fsn}" width="150" height="150">
+		<img id="prev_View_area" name="image" src="image.jsp?fname=${info.fsn}" max-width="100%" height="auto"/>
 		</div>
 	</Q:otherwise>
 	</Q:choose>	    	

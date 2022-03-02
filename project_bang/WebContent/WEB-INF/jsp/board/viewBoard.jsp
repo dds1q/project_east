@@ -154,7 +154,7 @@ $("#btnRecommend").click(function(){
 <br/> 
  -->
 <Q:if test="${!(empty board.fsn) }">
-<img id="image" src="image.jsp?fname=${board.fsn}" width="100%" height="auto" style="align:center;"/>
+<img id="image" src="image.jsp?fname=${board.fsn}" max-width="100%" height="auto" style="display: block; margin: 0 auto;"/>
 </Q:if>
 
 <!--

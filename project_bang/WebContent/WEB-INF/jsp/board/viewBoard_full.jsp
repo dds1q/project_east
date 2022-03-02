@@ -253,8 +253,9 @@ text-align: center;
 		</p>
 <br/> 
 <Q:if test="${!(empty board.fsn) }">
-<img src="image.jsp?fname=${board.fsn}" width="100%" height="auto"/>
+<img src="image.jsp?fname=${board.fsn}" max-width="100%" height="auto"/>
 </Q:if>
+<br/>
 <Q:choose>
 	<Q:when test="${(empty like.username)}">
 		<p id="btn" style="display:inline-block;"><img id="btn_push" onclick="push( ${board.no } );" src="heart_blank.png" width="20" height="20"/></p>
