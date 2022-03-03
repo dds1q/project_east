@@ -44,8 +44,15 @@ public class Ctrl {
 	private FollowDAO FollowDao = null;
 	private User_infoDAO User_infoDao = null;
 	private MessageDAO MessageDao = null;
+	private MessageListDAO MessageListDao = null;
 	public FollowDAO getFollowDao() {
 		return FollowDao;
+	}
+	public MessageListDAO getMessageListDao() {
+		return MessageListDao;
+	}
+	public void setMessageListDao(MessageListDAO messageListDao) {
+		MessageListDao = messageListDao;
 	}
 	public MessageDAO getMessageDao() {
 		return MessageDao;
