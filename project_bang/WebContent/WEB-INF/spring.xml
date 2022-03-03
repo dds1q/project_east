@@ -46,6 +46,9 @@
 	<bean id="MessageDao" class="east.MessageDAO_SpringImpl">
 		<property name="jdbcTemplate" ref="jtpl"/>
 	</bean> 
+	<bean id="MessageListDao" class="east.MessageListDAO_SpringImpl">
+		<property name="jdbcTemplate" ref="jtpl"/>
+	</bean> 
 	
 	<bean class="east.Ctrl">
 		<property name="BangDao" ref="BangDao"/>		
@@ -56,6 +59,7 @@
 		<property name="FollowDao" ref="FollowDao"/>
 		<property name="User_infoDao" ref="User_infoDao"/>
 		<property name="MessageDao" ref="MessageDao"/>
+		<property name="MessageListDao" ref="MessageListDao"/>
 	</bean>
 
 
