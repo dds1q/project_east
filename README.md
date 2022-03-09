@@ -21,3 +21,7 @@ AJAX를 이용하여 검색창에 유저 이름을 입력하면 실시간으로 
 
 2월 25일 
 현재 깃허브에 연동을 시켜놓았으나 eclipse로 작업하여 커밋을 해도 깃허브가 업데이트 되지 않는 현상이 발생.. 
+
+3월 2일
+tbl_userinfo 테이블을 user_list  테이블에 병합시켰다. 이로 인해 기존의 UserInfoVO, UserInfoDAO , UserInfoDAO_SpirngImpl 은 필요가 없어졌으므로 삭제를 해야하는데 
+이때 기존의 tbl_userinfo 테이블을 이용하여 유저정보에 접근했으므로 유저정보에 접근하려면 코드는 모두 user_list에 접근하도록 해야한다.
