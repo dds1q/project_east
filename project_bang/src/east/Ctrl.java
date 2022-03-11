@@ -41,8 +41,7 @@ public class Ctrl {
 	private BoardDAO BoardDao = null;
 	private CommentDAO CommentDao = null;
 	private LikeDAO LikeDao = null;
-	private FollowDAO FollowDao = null;
-	private User_infoDAO User_infoDao = null;
+	private FollowDAO FollowDao = null;	
 	private MessageDAO MessageDao = null;
 	private MessageListDAO MessageListDao = null;
 	public FollowDAO getFollowDao() {
@@ -60,12 +59,7 @@ public class Ctrl {
 	public void setMessageDao(MessageDAO messageDao) {
 		MessageDao = messageDao;
 	}
-	public User_infoDAO getUser_infoDao() {
-		return User_infoDao;
-	}
-	public void setUser_infoDao(User_infoDAO user_infoDao) {
-		User_infoDao = user_infoDao;
-	}
+
 	public void setFollowDao(FollowDAO followDao) {
 		FollowDao = followDao;
 	}
@@ -272,8 +266,7 @@ public class Ctrl {
         }
         if( result ) {
     		try {			
-				UserDao.addUser( username , password );	
-				User_infoDao.addUser_info( username );
+				UserDao.addUser( username , password );					
     		}
     		catch( Exception e ) { 
     			if ( e.toString().indexOf("PRIMARY") != -1) {
@@ -334,7 +327,7 @@ public class Ctrl {
 		Map<String,String> userinfo = new HashMap<>();
 		List<FollowVO> follow = FollowDao.findFollower( to_user );
 		for( FollowVO vo : follow  ) {
-			userinfo.put( User_infoDao.findUser_info( vo.getFrom_user() ).getFsn() , User_infoDao.findUser_info( vo.getFrom_user() ).getUser_nick());
+			userinfo.put( UserDao.User_info( vo.getFrom_user() ).getFsn() , UserDao.User_info( vo.getFrom_user() ).getUser_nick());
 			
 		}
 		mnv.addObject("userinfo", userinfo ); 
@@ -352,30 +345,12 @@ public class Ctrl {
 		Map<String,String> userinfo = new HashMap<>();
 		List<FollowVO> follow = FollowDao.findFollowing( from_user );
 		for( FollowVO vo : follow  ) {
-			userinfo.put( User_infoDao.findUser_info( vo.getTo_user() ).getFsn() , User_infoDao.findUser_info( vo.getTo_user() ).getUser_nick());
+			userinfo.put( UserDao.User_info( vo.getTo_user() ).getFsn() , UserDao.User_info( vo.getTo_user() ).getUser_nick());
 			
 		}
 		mnv.addObject("userinfo", userinfo ); 
 		return mnv;
-	}
-	@RequestMapping("/board_list_nick.east")
-	public ModelAndView board_list_nick( @RequestParam("nick") String nick, HttpSession session) throws Exception{
-		
-		ModelAndView mnv = new ModelAndView();	
-		String username_me = (String)session.getAttribute("username");
-		String username_other = User_infoDao.getUsername( nick );
-
-		mnv.setViewName("board/board_list_other");
-		mnv.addObject("username_other" , username_other );	
-		mnv.addObject("follow_exist" , FollowDao.findFollow( username_me, username_other));
-		mnv.addObject("info" , User_infoDao.findUser_info( username_other ) );
-		mnv.addObject("me" , User_infoDao.findUser_info( username_me ) );
-		mnv.addObject("list", BoardDao.findAll());		
-		mnv.addObject("following", FollowDao.findFollowing( username_other ));
-		mnv.addObject("follower", FollowDao.findFollower( username_other ));
-		
-		return mnv;
-	}
+	}	
 
 	
 	// 게시글 작성 화면 띄우기
