@@ -290,7 +290,10 @@ ${username} <a href="logout.east">[logout]</a></div>
 										</div>							
 									</div>					
 							 	</div>
-						</div> 	
+						</div>
+						<li class="list-group-item">
+ 							<div class="h6 text-muted">관심글 보기</div>	 
+ 						</li> 	
                     </ul>
                 </div>
             </div>            
