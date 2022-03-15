@@ -170,7 +170,9 @@ function click_board( author , username ){
 		location.href="board_list_other.east?username=" + author ;
 	}
 }
-
+function change_board(){
+	
+}
 </script>
 </head>
 <body>
@@ -292,13 +294,13 @@ ${username} <a href="logout.east">[logout]</a></div>
 							 	</div>
 						</div>
 						<li class="list-group-item">
- 							<div class="h6 text-muted">관심글 보기</div>	 
+ 							<div class="h6 text-muted" onclick="change_board();">관심글 보기</div>	 
  						</li> 	
                     </ul>
                 </div>
             </div>            
            	<div class="col-md-7">
-            <div class="container section" >            	
+            <div class="container section" >      
                 <Q:forEach items="${list}" var="board" varStatus="vs">
                 <div class="card gedf-card">
                     <div class="card-header">
@@ -365,8 +367,9 @@ ${username} <a href="logout.east">[logout]</a></div>
                 </div>
                 <br/>                
                 </Q:forEach>
+
                 <br/><br/><br/><br/><br/><br/>
-                </div>                <!-- Post /////--> 			
+                </div>                		
  			</div>
         </div>
     </div>

@@ -13,11 +13,9 @@ public class BangDAO_SpringImpl implements BangDAO {
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
-
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-
 	private JdbcTemplate jdbcTemplate = null;
 	
 	@Override
