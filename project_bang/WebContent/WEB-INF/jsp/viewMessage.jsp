@@ -176,10 +176,6 @@ img{ max-width:100%;}
 </Q:forEach>
 </div>
 </div>
-</div>
-</div>
-
-
                 
 <div class="card-footer">    
     <div class="modal-meta-bottom">
