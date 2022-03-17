@@ -171,7 +171,7 @@ function click_board( author , username ){
 	}
 }
 function change_board(){
-	location.href="board_list_like.east";
+	
 }
 </script>
 </head>
