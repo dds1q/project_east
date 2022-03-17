@@ -322,8 +322,7 @@ public class Ctrl {
 	public ModelAndView board_list_like( HttpSession session ) throws Exception{
 		
 		ModelAndView mnv = new ModelAndView();
-		String username = (String)session.getAttribute("username");
-		//ddd
+		String username = (String)session.getAttribute("username");		
 		mnv.setViewName("board/board_list_like");				
 		mnv.addObject("list", BoardDao.findAll());		
 		mnv.addObject("info" , UserDao.User_info( username ) );
