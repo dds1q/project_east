@@ -9,7 +9,7 @@
 
 2. 유저 검색 기능
 AJAX를 이용하여 검색창에 유저 이름을 입력하면 실시간으로 탐색을 하는 기능을 추가할 것이다.
-
+Cancel changes
 3. 해시태그
 게시글에 해시태그를 입력할 수 있도록 설정할 예정이다.
 
@@ -25,3 +25,5 @@ AJAX를 이용하여 검색창에 유저 이름을 입력하면 실시간으로 
 3월 2일
 tbl_userinfo 테이블을 user_list  테이블에 병합시켰다. 이로 인해 기존의 UserInfoVO, UserInfoDAO , UserInfoDAO_SpirngImpl 은 필요가 없어졌으므로 삭제를 해야하는데 
 이때 기존의 tbl_userinfo 테이블을 이용하여 유저정보에 접근했으므로 유저정보에 접근하려면 코드는 모두 user_list에 접근하도록 해야한다.
+
+3월 17일
