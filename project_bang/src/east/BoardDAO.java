@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface BoardDAO {
 	public List<BoardVO> findAll() throws Exception;	
+	public List<BoardVO> findBoard_like( String username ) throws Exception;
 	public int addBoard( BoardVO vo ) throws Exception;
 	public BoardVO findBoard( String no ) throws Exception;
 	public int modifyBoard( BoardVO vo ) throws Exception;

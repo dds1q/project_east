@@ -317,6 +317,21 @@ public class Ctrl {
 		
 		return mnv;
 	}
+	// 관심있는 글만 띄우는 페이지로 이동.
+	@RequestMapping("/board_list_like.east")
+	public ModelAndView board_list_like( HttpSession session ) throws Exception{
+		
+		ModelAndView mnv = new ModelAndView();
+		String username = (String)session.getAttribute("username");		
+		mnv.setViewName("board/board_list_like");				
+		mnv.addObject("list", BoardDao.findBoard_like( username ));		
+		mnv.addObject("info" , UserDao.User_info( username ) );
+		mnv.addObject("following", FollowDao.findFollowing( username ));
+		mnv.addObject("follower", FollowDao.findFollower( username ));		
+		
+		return mnv;
+	}
+	
 	//팔로워들 목록 보기
 	@RequestMapping("/followers.east")
 	public ModelAndView followers( @RequestParam("to_user") String to_user) throws Exception{

@@ -171,7 +171,7 @@ function click_board( author , username ){
 	}
 }
 function change_board(){
-	location.href="board_list_like.east";
+	location.href ="board_list.east";
 }
 </script>
 </head>
@@ -294,7 +294,7 @@ ${username} <a href="logout.east">[logout]</a></div>
 							 	</div>
 						</div>
 						<li class="list-group-item">
- 							<div class="h6 text-muted" onclick="change_board();">관심글 보기</div>	 
+ 							<div class="h6 text-muted" onclick="change_board();">모든 글 보기</div>	 
  						</li> 	
                     </ul>
                 </div>
