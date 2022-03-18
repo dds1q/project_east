@@ -324,7 +324,7 @@ public class Ctrl {
 		ModelAndView mnv = new ModelAndView();
 		String username = (String)session.getAttribute("username");		
 		mnv.setViewName("board/board_list_like");				
-		mnv.addObject("list", BoardDao.findAll());		
+		mnv.addObject("list", BoardDao.findBoard_like( username ));		
 		mnv.addObject("info" , UserDao.User_info( username ) );
 		mnv.addObject("following", FollowDao.findFollowing( username ));
 		mnv.addObject("follower", FollowDao.findFollower( username ));		
