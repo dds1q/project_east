@@ -190,6 +190,11 @@ function change_board(){
 </Q:otherwise>
 </Q:choose>
 ${username} <a href="logout.east">[logout]</a></div>
+<div>
+<form>
+<input type="text" name="keyword" value="" style="float:right;"/>
+</form>
+</div>
 </nav>
     <div class="container-fluid gedf-wrapper">
         <div class="row">
