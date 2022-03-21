@@ -36,7 +36,7 @@ import east.Util;
 
 @Controller
 public class Ctrl {
-	private BangDAO BangDao = null;
+//	private BangDAO BangDao = null;
 	private UserDAO UserDao = null;
 	private BoardDAO BoardDao = null;
 	private CommentDAO CommentDao = null;
@@ -88,12 +88,12 @@ public class Ctrl {
 	public void setUserDao(UserDAO userDao) {
 		UserDao = userDao;
 	}
-	public BangDAO getBangDao() {
-		return BangDao;
-	}
-	public void setBangDao(BangDAO bangDao) {
-		BangDao = bangDao;
-	}		
+//	public BangDAO getBangDao() {
+//		return BangDao;
+//	}
+//	public void setBangDao(BangDAO bangDao) {
+//		BangDao = bangDao;
+//	}		
 	@RequestMapping("/login.east")
 	public String login( HttpSession session ) throws Exception 
 	{
@@ -647,75 +647,75 @@ public class Ctrl {
 	}
 	
 	//방명록 명단 띄움	
-	@RequestMapping("/list.east")
-	public ModelAndView bang_list( HttpSession session ) throws Exception{
-				
-		ModelAndView mnv = new ModelAndView();
-		if( session.getAttribute("username").equals("admin") ) {
-			mnv.setViewName("bang_list_admin");
-		} else {
-			mnv.setViewName("bang_list");
-		}		
-		mnv.addObject("list", BangDao.findAll());		
-		
-		return mnv;
-	}
-		
-	// 방명록 작성	( 파일 업로드 기능도 있음 )
-	@RequestMapping("/add.east")
-	public ModelAndView add( HttpServletRequest request,
-		HttpServletResponse response, HttpSession session ) throws Exception 
-	{
-		
-		MultipartRequest mpr = new MultipartRequest( request , Util.upload(), 
-			1024*1024*16 , "utf-8", null );
-		
-		ModelAndView mnv = new ModelAndView();
-		
-		String content = mpr.getParameter("content");
-		if( content == null || content.equals("")) {
-			mnv.setViewName("redirect:list.east?ecode=invalid_content");
-			return mnv;
-		}
-			
-		Object author = session.getAttribute("username");
-		if( author == null || author.equals("")) {
-			mnv.setViewName("redirect:list.east?ecode=invalid_author");
-			return mnv;
-		}
-		
-		BangVO vo = new BangVO();
-		vo.setContent( content );
-		vo.setAuthor( (String)author );
-			
-		String ofn = mpr.getOriginalFileName("apple");
-		if( ofn != null )
-		{
-			File file = mpr.getFile("apple");
-			
-			String fsn = UUID.randomUUID().toString();
-			file.renameTo( new File( Util.upload() + fsn ) );
-
-			vo.setOfn( ofn );
-			vo.setFsn( fsn );
-		}
-		BangDao.add( vo );			
-		mnv.setViewName("redirect:list.east");
-		
-		return mnv;
-	}		
-	
-	// 방명록 삭제
-	@RequestMapping("/del.east")
-	public String del( @RequestParam("no") String no  ) throws Exception{		
-
-		if( no == null || no.equals("")) {
-			return "redirect:list.east?ecode=invalid_no";
-		}
-		BangDao.del( no );
-		
-		return "redirect:list.east";
-	}
+//	@RequestMapping("/list.east")
+//	public ModelAndView bang_list( HttpSession session ) throws Exception{
+//				
+//		ModelAndView mnv = new ModelAndView();
+//		if( session.getAttribute("username").equals("admin") ) {
+//			mnv.setViewName("bang_list_admin");
+//		} else {
+//			mnv.setViewName("bang_list");
+//		}		
+//		mnv.addObject("list", BangDao.findAll());		
+//		
+//		return mnv;
+//	}
+//		
+//	// 방명록 작성	( 파일 업로드 기능도 있음 )
+//	@RequestMapping("/add.east")
+//	public ModelAndView add( HttpServletRequest request,
+//		HttpServletResponse response, HttpSession session ) throws Exception 
+//	{
+//		
+//		MultipartRequest mpr = new MultipartRequest( request , Util.upload(), 
+//			1024*1024*16 , "utf-8", null );
+//		
+//		ModelAndView mnv = new ModelAndView();
+//		
+//		String content = mpr.getParameter("content");
+//		if( content == null || content.equals("")) {
+//			mnv.setViewName("redirect:list.east?ecode=invalid_content");
+//			return mnv;
+//		}
+//			
+//		Object author = session.getAttribute("username");
+//		if( author == null || author.equals("")) {
+//			mnv.setViewName("redirect:list.east?ecode=invalid_author");
+//			return mnv;
+//		}
+//		
+//		BangVO vo = new BangVO();
+//		vo.setContent( content );
+//		vo.setAuthor( (String)author );
+//			
+//		String ofn = mpr.getOriginalFileName("apple");
+//		if( ofn != null )
+//		{
+//			File file = mpr.getFile("apple");
+//			
+//			String fsn = UUID.randomUUID().toString();
+//			file.renameTo( new File( Util.upload() + fsn ) );
+//
+//			vo.setOfn( ofn );
+//			vo.setFsn( fsn );
+//		}
+//		BangDao.add( vo );			
+//		mnv.setViewName("redirect:list.east");
+//		
+//		return mnv;
+//	}		
+//	
+//	// 방명록 삭제
+//	@RequestMapping("/del.east")
+//	public String del( @RequestParam("no") String no  ) throws Exception{		
+//
+//		if( no == null || no.equals("")) {
+//			return "redirect:list.east?ecode=invalid_no";
+//		}
+//		BangDao.del( no );
+//		
+//		return "redirect:list.east";
+//	}
 	
 	//빈 하트 클릭시 좋아요 저장..
 	@RequestMapping("/addLike.east")
