@@ -15,10 +15,6 @@
 		<property name="dataSource" ref="dbcp"/>
 	</bean>
 	
-	<bean id="BangDao" class="east.BangDAO_SpringImpl">
-		<property name="jdbcTemplate" ref="jtpl"/>
-	</bean>
-	
 	<bean id="UserDao" class="east.UserDAO_SpringImpl">
 		<property name="jdbcTemplate" ref="jtpl"/>
 	</bean>
@@ -46,8 +42,7 @@
 		<property name="jdbcTemplate" ref="jtpl"/>
 	</bean> 
 	
-	<bean class="east.Ctrl">
-		<property name="BangDao" ref="BangDao"/>		
+	<bean class="east.Ctrl">	
 		<property name="UserDao" ref="UserDao"/>
 		<property name="BoardDao" ref="BoardDao"/>
 		<property name="CommentDao" ref="CommentDao"/>
