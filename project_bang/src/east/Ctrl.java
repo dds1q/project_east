@@ -455,6 +455,18 @@ public class Ctrl {
         PrintWriter out = response.getWriter();
 	    out.print( jo );	
 	}
+	// 검색을 통해 유저 이미지, 닉네임 리스트 찾아줌
+	@RequestMapping("/search_user.east")
+	public void search_user( @RequestParam("user_nick") String nick , HttpServletResponse response) throws Exception{
+
+		
+		JSONObject jo = new JSONObject();		
+	    jo.put("success", true );
+	    jo.put( "search" , UserDao.search_user( nick ) );
+		response.setContentType("text/html; charset=UTF-8");             
+        PrintWriter out = response.getWriter();
+	    out.print( jo );	
+	}
 	
 	// 게시글 풀버전 조회하기, 댓글 보기 ( 고유번호인 글번호로 구분)
 	@RequestMapping("/viewBoard_full.east")

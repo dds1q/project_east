@@ -11,7 +11,7 @@ public interface BoardDAO {
 	public int delBoard( String no ) throws Exception;
 	public void updateviewCount( String no ) throws Exception;
 	public int plusLikeCount( String no ) throws Exception;
-	public int minusLikeCount( String no ) throws Exception;
+	public int minusLikeCount( String no ) throws Exception;	
 }
 
 //update 2 25ddddddd
