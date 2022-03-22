@@ -173,6 +173,27 @@ function click_board( author , username ){
 function change_board(){
 	location.href="board_list_like.east";
 }
+function search( target ){
+	var nick = target.value;
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if( xhr.readyState == 4 ) {
+			if( xhr.status == 200 ) {
+				var rt = xhr.responseText;
+				var jo = window.eval( "("+ rt +")" );
+				if( jo.success ){
+					var search_nick = document.getElementById("search_nick");					
+					search_nick.innerHTML = jo.search;					
+				} else{
+					alert('½ÇÆÐ');					
+				}				
+			}
+		} 
+	};
+	xhr.open("GET", "search_user.east?user_nick=" + nick , true );
+	xhr.send( null );
+
+}
 </script>
 </head>
 <body>
@@ -192,7 +213,9 @@ function change_board(){
 ${username} <a href="logout.east">[logout]</a></div>
 <div>
 <form>
-<input type="text" name="keyword" value="" style="float:right;"/>
+<input type="text" name="keyword" placeholder="serach nickname..." 
+style="float:right;" onkeyup="search( this );"/>
+<p id="search_nick"></p>
 </form>
 </div>
 </nav>

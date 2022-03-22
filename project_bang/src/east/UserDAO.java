@@ -8,4 +8,5 @@ public interface UserDAO {
 	public UserVO User_info( String username ) throws Exception;
 	public int modifyInfo(UserVO vo) throws Exception;
 	public List<UserVO> findAll() throws Exception;
+	public List<UserVO> search_user( String nick ) throws Exception;
 }
