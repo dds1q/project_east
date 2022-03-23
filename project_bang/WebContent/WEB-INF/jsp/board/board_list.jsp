@@ -182,8 +182,10 @@ function search( target ){
 				var rt = xhr.responseText;
 				var jo = window.eval( "("+ rt +")" );
 				if( jo.success ){
-					var search_nick = document.getElementById("search_nick");					
-					search_nick.innerHTML = jo.search;					
+					var search_nick = document.getElementById("search_nick");
+					for( var i = 0 ; i < jo.search.length ; i++){
+						search_nick.value = jo.search[i].childNodes[0].nodeValue + "\n";				
+					}				
 				} else{
 					alert('½ÇÆÐ');					
 				}				
@@ -192,7 +194,6 @@ function search( target ){
 	};
 	xhr.open("GET", "search_user.east?user_nick=" + nick , true );
 	xhr.send( null );
-
 }
 </script>
 </head>
@@ -215,7 +216,7 @@ ${username} <a href="logout.east">[logout]</a></div>
 <form>
 <input type="text" name="keyword" placeholder="serach nickname..." 
 style="float:right;" onkeyup="search( this );"/>
-<p id="search_nick"></p>
+<input type="text"  id="search_nick" value=""/>
 </form>
 </div>
 </nav>
