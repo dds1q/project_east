@@ -180,21 +180,26 @@ function search( target ){
 		if( xhr.readyState == 4 ) {
 			if( xhr.status == 200 ) {
 				var rt = xhr.responseText;
-				var jo = window.eval( "("+ rt +")" );
-				if( jo.success ){
-					var search_nick = document.getElementById("search_nick");
-					for( var i = 0 ; i < jo.search.length ; i++){
-						search_nick.value = jo.search[i].childNodes[0].nodeValue + "\n";				
-					}				
-				} else{
-					alert('실패');					
-				}				
+//				var jo = window.eval( "("+ rt +")" );
+				var parseData = JSON.parse( rt );
+//				if( jo.success ){
+				for( var object in parseData ){
+					for( var key in json[object]){
+						alert( key + json[object][key] );
+					}
+				}
+	
+//				} else{
+//					alert('실패');					
+//				}				
 			}
 		} 
 	};
 	xhr.open("GET", "search_user.east?user_nick=" + nick , true );
 	xhr.send( null );
 }
+/*	*/
+
 </script>
 </head>
 <body>
