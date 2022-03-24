@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -458,14 +460,17 @@ public class Ctrl {
 	// 검색을 통해 유저 이미지, 닉네임 리스트 찾아줌
 	@RequestMapping("/search_user.east")
 	public void search_user( @RequestParam("user_nick") String nick , HttpServletResponse response) throws Exception{
-
-		
-		JSONObject jo = new JSONObject();		
-	    jo.put("success", true );
-	    jo.put( "search" , UserDao.search_user( nick ) );
+//		JSONObject jo = new JSONObject();		
+//	    jo.put("success", true );
+	    ArrayList<UserVO> list =new ArrayList<UserVO>();
+	    for( UserVO vo : UserDao.search_user( nick ) ) {
+	    	list.add( vo );
+	    }
+	    JSONArray ja = new JSONArray( list );
 		response.setContentType("text/html; charset=UTF-8");             
         PrintWriter out = response.getWriter();
-	    out.print( jo );	
+//	    out.print( jo );	
+	    out.println( ja.toString() );
 	}
 	
 	// 게시글 풀버전 조회하기, 댓글 보기 ( 고유번호인 글번호로 구분)
