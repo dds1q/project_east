@@ -181,7 +181,7 @@ img{ max-width:100%;}
     <div class="modal-meta-bottom">
        <form method="POST" action="sendMessage.east" enctype="multipart/form-data">
        <textarea class="form-control" name="message" placeholder="Leave a Message.."></textarea>
-       <input type="hidden"name="to_user" value="${username_other}"/>
+       <input type="hidden"name="to_user" value="${info.username}"/>
        <button class="button" type="submit">¿€º∫</button>
        </form>
     </div> 				

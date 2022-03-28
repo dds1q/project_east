@@ -46,8 +46,48 @@ public class MessageDAO_SpringImpl implements MessageDAO{
 			}
 			
 		};
-		int uc = jdbcTemplate.update("INSERT INTO tbl_message( from_user , to_user, message  ) "
+		int uc = jdbcTemplate.update("INSERT INTO tbl_message( from_user , to_user , message  ) "
 				+ "VALUES(  ? , ? , ? )" , pss );
 		return uc;
 	}
+	@Override
+	public boolean Messageroom(String me, String other) throws Exception {
+		boolean t = false;		 
+		try {			
+			RowMapper<MessageVO> rowMapper = new RowMapper<MessageVO>() {					
+				@Override
+				public MessageVO mapRow(ResultSet rs, int arg1) throws SQLException {
+					MessageVO vo = new MessageVO();				
+					vo.setFrom_user(rs.getString("from_user"));
+					vo.setTo_user( rs.getString("to_user"));
+					return vo;
+				}			
+			};		
+			MessageVO vo1 = jdbcTemplate.queryForObject(
+						"select * from tbl_message where from_user='"+ me + "' AND to_user='"+other
+						+ "'",	rowMapper);
+			MessageVO vo2 = jdbcTemplate.queryForObject(
+					"select * from tbl_message where from_user='"+ other + "' AND to_user='"+me
+					+ "'",	rowMapper);
+			if ( vo1 == null & vo2 == null ) {
+				t = true;							
+			}	
+		}
+		catch( Exception e ) { e.toString(); }
+		return t;
+	}
+	@Override
+	public int addMessageroom(String me, String other) throws Exception {
+		PreparedStatementSetter pss = new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement stmt) throws SQLException {								
+				stmt.setString( 1 , me );
+				stmt.setString( 2 , other ) ;						
+			}
+			
+		};
+		int uc = jdbcTemplate.update("INSERT INTO tbl_messagelist( user_me , user_other ) VALUES(  ? , ?   )" , pss );
+		return uc;
+	}	
 }

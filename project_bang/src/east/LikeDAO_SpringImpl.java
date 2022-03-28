@@ -110,7 +110,7 @@ public class LikeDAO_SpringImpl implements LikeDAO{
 				return false;
 			}
 			
-		}	catch( EmptyResultDataAccessException e ) { return false;	}
+		}catch( EmptyResultDataAccessException e ) { return false;	}
 		
 	}
 }
