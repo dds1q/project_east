@@ -180,18 +180,12 @@ function search( target ){
 		if( xhr.readyState == 4 ) {
 			if( xhr.status == 200 ) {
 				var rt = xhr.responseText;
-//				var jo = window.eval( "("+ rt +")" );
-				var parseData = JSON.parse( rt );
-//				if( jo.success ){
-				for( var object in parseData ){
-					for( var key in json[object]){
-						alert( key + json[object][key] );
-					}
-				}
-	
-//				} else{
-//					alert('실패');					
-//				}				
+				var jo = window.eval( "("+ rt +")" );
+				if( jo.success ){
+					
+				} else{
+					alert('실패');					
+				}				
 			}
 		} 
 	};
@@ -263,10 +257,10 @@ style="float:right;" onkeyup="search( this );"/>
 							</div>							
 						</div>					
 				 	</div>
-					</div>  									
-					<button class="btn btn-primary btn-icon-text btn-edit-profile" style="margin-top:5px;">
-						 Message
-					</button>                 
+					</div>  				
+					<button class="btn btn-primary btn-icon-text btn-edit-profile" 
+					onclick="location.href='viewMessageList.east';">				
+					DM</button>		                
                    	</div>
                    	<!--  -->
                     <ul class="list-group list-group-flush">

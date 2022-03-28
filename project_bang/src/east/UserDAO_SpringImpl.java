@@ -52,39 +52,36 @@ public class UserDAO_SpringImpl implements UserDAO {
 	@Override
 	public int addUser(String username, String password) throws Exception {
 		PreparedStatementSetter pss = new PreparedStatementSetter() {
-
 			@Override
 			public void setValues(PreparedStatement stmt) throws SQLException {
 				stmt.setString(1, username);
 				stmt.setString(2, password);
-			}
-			
+			}			
 		};
-		int uc = jdbcTemplate.update("INSERT INTO user_list VALUES( ? , ? )" , pss );
+		int uc = jdbcTemplate.update("INSERT INTO user_list(username , password) VALUES( ? , ? )" , pss );
 		return uc;		
 	}
 	
 	// 특정 유저 정보 불러오기
 	@Override
 	public UserVO User_info(String username) throws Exception {
-
-		RowMapper<UserVO> rowMapper = new RowMapper<UserVO>() {			
-			
-			@Override
-			public UserVO mapRow(ResultSet rs, int arg1) throws SQLException {
-				UserVO vo = new UserVO();				
-				vo.setUsername( rs.getString("username"));				
-				vo.setUser_nick( rs.getString("user_nick"));
-				vo.setUser_intro( rs.getString("user_intro"));							
-				vo.setFsn( rs.getString("fsn"));				
-				return vo;
-			}			
-		};			
-		
-		UserVO vo = jdbcTemplate.queryForObject(
-				"select * from user_list WHERE username='"+ username + "'", rowMapper);
-
-		return vo;
+		UserVO vo = null;
+		try {
+			RowMapper<UserVO> rowMapper = new RowMapper<UserVO>() {			
+				@Override
+				public UserVO mapRow(ResultSet rs, int arg1) throws SQLException {
+					UserVO vo = new UserVO();				
+					vo.setUsername( rs.getString("username"));				
+					vo.setUser_nick( rs.getString("user_nick"));
+					vo.setUser_intro( rs.getString("user_intro"));							
+					vo.setFsn( rs.getString("fsn"));				
+					return vo;
+				}			
+			};	
+			vo = jdbcTemplate.queryForObject(
+					"select * from user_list WHERE username='"+ username + "'", rowMapper);			
+		} catch( Exception e) { e.toString(); }
+		return vo;	
 
 	}
 

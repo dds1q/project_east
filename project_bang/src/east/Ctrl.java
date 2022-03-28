@@ -144,9 +144,9 @@ public class Ctrl {
 	@RequestMapping("/sign_up.east")
 	public void sign_up( HttpServletRequest request, HttpServletResponse response ) throws Exception 
 	{
-		String clientId = "6yyle1am8h";//애플리케이션 클라이언트 아이디값";
+		String clientId = "wlyhuc7f3k";//애플리케이션 클라이언트 아이디값";
         //애플리케이션 클라이언트 시크릿값";
-        String clientSecret = "g6zVbghq5vnGFMVPbfi0kClYNRR4rYrZYNsSTnGJ";
+        String clientSecret = "iqNHc1Vt2auy97beZiVS5TQcilkuBk8P3iMlVzs4";
         String key = null;
         String tempname = null;		//파일명
         try {
@@ -224,15 +224,13 @@ public class Ctrl {
 	// 회원가입 ( CAPTCH 확인 )
 	@RequestMapping("/sign_up2.east")
 	public void adduser( @RequestParam("username") String username, @RequestParam("password") String password,
-			HttpServletRequest request, HttpServletResponse response) throws Exception 	{
-
-		
-		String clientId = "6yyle1am8h";//애플리케이션 클라이언트 아이디값";
-        String clientSecret = "g6zVbghq5vnGFMVPbfi0kClYNRR4rYrZYNsSTnGJ";//애플리케이션 클라이언트 시크릿값";
+			HttpServletRequest request, HttpServletResponse response) throws Exception 	{		
+		String clientId = "wlyhuc7f3k";//애플리케이션 클라이언트 아이디값";
+        String clientSecret = "iqNHc1Vt2auy97beZiVS5TQcilkuBk8P3iMlVzs4";//애플리케이션 클라이언트 시크릿값";
         String key = request.getParameter("key"); // 캡차 키 발급시 받은 키값
         String captcha = request.getParameter("captcha"); // 사용자가 입력한 캡차 이미지 글자값
         response.setContentType("text/html; charset=UTF-8");             
-        PrintWriter out = response.getWriter();                
+        PrintWriter out = response.getWriter();           
       
         System.out.println( key );
         System.out.println( captcha );
@@ -273,8 +271,7 @@ public class Ctrl {
     		catch( Exception e ) { 
     			if ( e.toString().indexOf("PRIMARY") != -1) {
     				out.println("<script language='javascript'>alert('중복된 계정입니다'); location.href='sign_up.east';</script>");
-    				out.flush();
-    				
+    				out.flush();    				
     			}
     		}
         } else {
@@ -460,17 +457,26 @@ public class Ctrl {
 	// 검색을 통해 유저 이미지, 닉네임 리스트 찾아줌
 	@RequestMapping("/search_user.east")
 	public void search_user( @RequestParam("user_nick") String nick , HttpServletResponse response) throws Exception{
-//		JSONObject jo = new JSONObject();		
-//	    jo.put("success", true );
-	    ArrayList<UserVO> list =new ArrayList<UserVO>();
-	    for( UserVO vo : UserDao.search_user( nick ) ) {
-	    	list.add( vo );
+
+		JSONObject jo = new JSONObject();		
+		jo.put("success", true );
+		ArrayList list = ( ArrayList ) UserDao.search_user( nick );
+	    JSONArray ja = new JSONArray();
+	    UserVO vo = null;
+	    
+	    for( int i = 0 ; i < list.size() ; i++ ) {
+	    	vo = ( UserVO )list.get(i);
+		    JSONObject jo1 = new JSONObject();
+		    jo1.put( "nick", vo.getUser_nick() );
+		    jo1.put( "image", vo.getFsn() );		    
+		    ja.put( jo1 );
 	    }
-	    JSONArray ja = new JSONArray( list );
+	    jo.put( "search", ja );
+
 		response.setContentType("text/html; charset=UTF-8");             
         PrintWriter out = response.getWriter();
-//	    out.print( jo );	
-	    out.println( ja.toString() );
+	    out.print( jo );	
+
 	}
 	
 	// 게시글 풀버전 조회하기, 댓글 보기 ( 고유번호인 글번호로 구분)
@@ -620,14 +626,22 @@ public class Ctrl {
 	public ModelAndView modifyBoard_Page( HttpSession session , @RequestParam("username_other") String username_other ) throws Exception{	
 		
 		ModelAndView mnv = new ModelAndView();		
-		mnv.setViewName("viewMessage");
-	
+		mnv.setViewName("viewMessage");	
 		mnv.addObject("message", MessageDao.findAll());			
 		mnv.addObject("info", UserDao.User_info( username_other ));
 	
 		return mnv;
 	}	
-	
+	//메세지 보는 창으로 이동2
+	@RequestMapping("/viewMessageList.east")
+	public ModelAndView modifyBoard_Page( HttpSession session ) throws Exception{			
+		ModelAndView mnv = new ModelAndView();		
+		mnv.setViewName("MessageList");	
+		mnv.addObject("message", MessageDao.findAll());		
+		mnv.addObject("user", UserDao.findAll() );
+		
+		return mnv;
+	}	
 	//메세지 작성
 	@RequestMapping("/sendMessage.east")
 	public ModelAndView sendMessage( HttpServletRequest request,
@@ -635,17 +649,18 @@ public class Ctrl {
 	{		
 		MultipartRequest mpr = new MultipartRequest( request , Util.upload(), 
 			1024*1024*16 , "utf-8", null );		
-		ModelAndView mnv = new ModelAndView();
+		ModelAndView mnv = new ModelAndView();		
 		
-		String from_user = (String)session.getAttribute("username");
+		String from_user = (String)session.getAttribute("username");		
 		String to_user = mpr.getParameter("to_user");
 		String message = mpr.getParameter("message");	
-		
+		if( MessageDao.Messageroom( from_user , to_user ) ) {
+			MessageDao.addMessageroom( from_user , to_user ) ;
+		}		
 		MessageVO vo = new MessageVO();
 		vo.setMessage( message );
 		vo.setFrom_user( from_user );
-		vo.setTo_user( to_user );
-			
+		vo.setTo_user( to_user );			
 //		String ofn = mpr.getOriginalFileName("apple");
 //		if( ofn != null )
 //		{
@@ -658,7 +673,7 @@ public class Ctrl {
 //			vo.setFsn( fsn );
 //		}
 		MessageDao.sendMessage( vo );			
-		mnv.setViewName("redirect:viewMessage.east?username_other="+ to_user);
+		mnv.setViewName("redirect:viewMessage.east?username_other="+ to_user );
 		
 		return mnv;
 	}
