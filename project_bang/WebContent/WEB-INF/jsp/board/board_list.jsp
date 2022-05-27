@@ -212,11 +212,6 @@ function search( target ){
 </Q:choose>
 ${username} <a href="logout.east">[logout]</a></div>
 <div>
-<form>
-<input type="text" name="keyword" placeholder="serach nickname..." 
-style="float:right;" onkeyup="search( this );"/>
-<input type="text"  id="search_nick" value=""/>
-</form>
 </div>
 </nav>
     <div class="container-fluid gedf-wrapper">
@@ -346,6 +341,7 @@ style="float:right;" onkeyup="search( this );"/>
                         </div>
                     </div>
                 <div class="card-body ">
+                 
               	<div class="main" data-toggle="modal" data-target="#modal${vs.index }">
                     <iframe id="board${vs.index}"
 							title="no example"			
@@ -355,7 +351,8 @@ style="float:right;" onkeyup="search( this );"/>
 							width="100%"
 							style= "overflow-x:hidden; overflow-y:auto;"
 							src="viewBoard.east?no=${board.no}">		
-					</iframe> 					
+					</iframe> 
+					<!-- 게시글 클릭시 모달창 뜨게 하는 코드  -->   					
 					<div class="modal fade" id="modal${vs.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog"  role="document">
 						<div class="modal-content">							
@@ -370,9 +367,10 @@ style="float:right;" onkeyup="search( this );"/>
 						</div>					
 				 	</div>
 				</div>                
-                </div>                  
+                </div>                 
+               
                 <div class="card-footer">    
-                <Q:if test="${username eq board.author}">                
+                <Q:if test="${username eq board.author}">                            
                 <div class="main" data-toggle="modal" data-target="#modal_board_modify${vs.index }">
                 	<button type="button" class="btn btn-danger btn-sm" onclick="location.href='delBoard.east?no=${board.no}';">Delete</button>
                  	<button type="button" class="btn btn-danger btn-sm">Modify</button>					

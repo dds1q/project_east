@@ -63,10 +63,10 @@ public class MessageDAO_SpringImpl implements MessageDAO{
 					return vo;
 				}			
 			};		
-			MessageVO vo1 = jdbcTemplate.queryForObject(
+			List<MessageVO> vo1 = jdbcTemplate.query(
 						"select * from tbl_message where from_user='"+ me + "' AND to_user='"+other
 						+ "'",	rowMapper);
-			MessageVO vo2 = jdbcTemplate.queryForObject(
+			List<MessageVO> vo2 = jdbcTemplate.query(
 					"select * from tbl_message where from_user='"+ other + "' AND to_user='"+me
 					+ "'",	rowMapper);
 			if ( vo1 == null & vo2 == null ) {
@@ -79,7 +79,6 @@ public class MessageDAO_SpringImpl implements MessageDAO{
 	@Override
 	public int addMessageroom(String me, String other) throws Exception {
 		PreparedStatementSetter pss = new PreparedStatementSetter() {
-
 			@Override
 			public void setValues(PreparedStatement stmt) throws SQLException {								
 				stmt.setString( 1 , me );
@@ -87,7 +86,7 @@ public class MessageDAO_SpringImpl implements MessageDAO{
 			}
 			
 		};
-		int uc = jdbcTemplate.update("INSERT INTO tbl_messagelist( user_me , user_other ) VALUES(  ? , ?   )" , pss );
+		int uc = jdbcTemplate.update("INSERT INTO tbl_messagelist ( user_me , user_other ) VALUES(  ? , ?   )" , pss );
 		return uc;
 	}	
 }

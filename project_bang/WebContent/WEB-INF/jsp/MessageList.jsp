@@ -22,7 +22,7 @@
                 <div>
                     <h1>MessageList</h1>
                 </div>
-                 <Q:forEach items="${ user }" var="user">               	
+                 <Q:forEach items="${ user }" var="user">                           	
                     <div class="d-flex flex-row justify-content-between align-items-center" onclick="window.parent.location.href ='board_list_nick.east?nick=${user.user_nick}'">
                     <div class="d-flex flex-row align-items-center"><img class="rounded-circle" src="image.jsp?fname=${user.fsn }" width="55">
                  <!--  <div class="d-flex flex-column align-items-start ml-2"><span class="font-weight-bold">${userinfo.value }</span></div>  --> 
