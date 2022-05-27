@@ -58,9 +58,8 @@ public class BoardDAO_SpringImpl implements BoardDAO{
 		return uc;
 	}
 	@Override
-	public BoardVO findBoard( String no ) throws Exception {
-		
- 		
+	public BoardVO findBoard( String no ) throws Exception {		
+ 		// test
 		RowMapper<BoardVO> rowMapper = new RowMapper<BoardVO>() {			
 			
 			@Override
@@ -83,8 +82,6 @@ public class BoardDAO_SpringImpl implements BoardDAO{
 				"select * from tbl_board WHERE no="+ no , rowMapper);
 
 		return vo;
-//		catch( Exception e ) { e.toString(); }
-
 	}
 
 

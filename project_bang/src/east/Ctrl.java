@@ -654,6 +654,7 @@ public class Ctrl {
 		String from_user = (String)session.getAttribute("username");		
 		String to_user = mpr.getParameter("to_user");
 		String message = mpr.getParameter("message");	
+		
 		if( MessageDao.Messageroom( from_user , to_user ) ) {
 			MessageDao.addMessageroom( from_user , to_user ) ;
 		}		
