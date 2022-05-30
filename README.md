@@ -1,5 +1,6 @@
 # project_east
 
+Controll, VO, DAO 파일 : project_bang > src > east 
 
 1월 26일 
 
