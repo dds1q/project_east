@@ -1,7 +1,8 @@
 # project_east
 
-Controll, VO, DAO 파일 : project_bang > src > east 
-jsp 파일 : project_bang > WEB-INF > jsp
+- Controll, VO, DAO 파일 : project_bang > src > east
+
+- jsp 파일 : project_bang > WebContent > WEB-INF > jsp
 
 1월 26일 
 
